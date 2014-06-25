@@ -1,0 +1,8 @@
+{
+  "name": "kbv2",
+  "descripiton": "kbv2",
+  "dependencies": {
+    "angular": "latest",
+    "polymer": "Polymer/polymer#~0.2.4"
+  }
+}

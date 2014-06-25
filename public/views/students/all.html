@@ -1,0 +1,36 @@
+<div ng-controller="AlertController">
+  <div ng-repeat="alert in alerts">
+    <alert type="{{alert.type}}" class="alert" ng-click="closeAlert(alert)">
+      {{alert.msg}}
+    </alert>
+  </div>
+</div>
+<button class="btn btn-default" ng-click="openCreate()">Create Student</button>
+{{tableParams.sorting()|json}}
+<table class="table table-stiped table-hover" sortable>
+<thead>
+  <tr>
+    <th sorter sorter-name="Name" sorter-predicate="name.full" sorter-default />
+    <th sorter sorter-name="Rank" sorter-predicate="rank.priority" />
+    <th sorter sorter-name="ATA number" sorter-predicate="ata_number" />
+    <th sorter sorter-name="Date of birth" sorter-predicate="dob" />
+  </tr>
+</thead>
+<tbody>
+  <tr ng-repeat="student in students | orderBy:predicate:reverse">
+    <td>{{student.name.full}}</td>
+    <td>{{student.rank.name}}</td>
+    <td>{{student.ata_number}}</td>
+    <td>{{student.dob | date: 'MM/dd/yyyy'}}</td>
+    <td class="btn-group" dropdown>
+      <button type="button" ui-sref="students.view( {studentId: student._id} )" class="btn btn-default" href="/view">View</button>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a href="#" ng-click="openUpdate(student)">Update</a></li>
+        <li class="divider"></li>
+        <li><a href="#" ng-click="deleteStudent(student._id)">Delete</a></li>
+      </ul>
+    </td>
+  </tr>
+</tbody>
+</table>

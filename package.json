@@ -1,0 +1,9 @@
+{
+	"name": "kbv2",
+	"description": "Kickbag Martial Arts Manager",
+	"version": "0.0.0",
+	"private": true,
+	"dependencies": {
+		"mongoose": "*"
+	}
+}

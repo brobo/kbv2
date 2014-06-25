@@ -1,0 +1,58 @@
+<div class="modal-header">
+  <h3 class="modal-title">Create Student</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" name="studentForm" ng-submit="submitForm(studentForm, student)" novalidate>
+    <fieldset>
+      <div class="form-group">
+        <label for="firstName" class="col-lg-2 control-label">First name</label>
+        <div class="col-lg-10" ng-class="{'has-error': studentForm.firstName.$invalid && submitted}">
+          <input type="text" class="form-control col-lg-10" id="firstName" name="firstName" ng-model="student.name.first" placeholder="Bobby" required>
+          <p ng-show="studentForm.firstName.$invalid && submitted" class="text-warning">A name is required.</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName" class="col-lg-2 control-label">Last name</label>
+        <div class="col-lg-10" ng-class="{'has-error': studentForm.lastName.$invalid && submitted}">
+          <input type="text" class="form-control" id="lastName" name="lastName" ng-model="student.name.last" placeholder="Tables" required>
+          <p ng-show="studentForm.lastName.$invalid && submitted" class="text-warning">A name is required.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="rank" class="col-lg-2 control-label">Rank</label>
+        <div class="col-lg-10" ng-class="{'has-error': studentForm.rank.$invalid && submitted}">
+          <select class="form-control" id="belt" name="belt" ng-model='student.rank.belt' ng-options='belt.name for belt in belts'></select>
+        </div>
+      </div>
+      The thing is: {{student.rank.belt | json}}
+      <div class="form-group row">
+        <label for="dob" class="col-lg-2 control-label">Date of birth</label>
+        <div class="col-lg-10" ng-class="{'has-error': studentForm.dob.$invalid && submitted}">
+          <p class="input-group">
+            <input type="text" ng-model="student.dob" name="dob" class="form-control" datepicker-popup="MM/dd/yyyy" is-open="$parent.opened" close-text="Close" close-on-date-selection="true" placeholder="01/01/1970" required>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+            </span>
+          </p>
+          <p ng-show="studentForm.dob.$invalid && submitted" class="text-warning">A date of birth is required.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ataNumber" class="col-lg-2 control-label">ATA number</label>
+        <div class="col-lg-10" ng-class="{'has-error': studentForm.ataNumber.$invalid && submitted}">
+          <input type="text" id="ataNumber" name="ataNumber" ng-model="student.ata_number" class="form-control" ng-pattern="ATA_NUMBER_REGEX">
+          <p ng-show="studentForm.ataNumber.$error.pattern && submitted" class="text-warning">Please enter a valid ATA number.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="notes" class="col-lg-2 control-label">Notes</label>
+        <div class="col-lg-10">
+          <textarea id="notes" ng-model="student.notes" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+    </fieldset>
+    <button type="button" class="btn btn-default" ng-click="closeCreate()">Cancel</button>
+    <button type="submit" ng-show="tracker.active()" class="btn btn-success pull-right" disabled><i class="fa fa-spin fa-circle-o-notch"></i></button>
+    <button type="submit" ng-show="!tracker.active()" class="btn btn-success pull-right">Save</button>
+  </form>
+</div>
